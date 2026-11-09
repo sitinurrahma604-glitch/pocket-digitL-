@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Digital Bahasa Inggris - Kelas 4 SD</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Fredoka', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Latar Belakang Dunia Anak (Langit, Awan & Rumput Hijau) */
+        body {
+            background: linear-gradient(to bottom, #70e0d6 0%, #54a0ff 60%, #5f27cd 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hiasan Rumput di Bagian Bawah */
+        body::after {
+            content: "";
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: #10ac84;
+            border-top: 6px solid #1dd1a1;
+            border-radius: 20px 20px 0 0;
+            z-index: 0;
+        }
+
+        /* Hiasan Awan Kartun di Atas */
+        body::before {
+            content: "☁️   ☁️       ☁️";
+            position: fixed;
+            top: 15px;
+            left: 0;
+            right: 0;
+            font-size: 2.5rem;
+            text-align: center;
+            opacity: 0.6;
+            z-index: 0;
+            letter-spacing: 50px;
+        }
+
+        /* Container Kartu Utama */
+        .card-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            border: 6px solid #ff9f43;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px #ee5253;
+            letter-spacing: 0.5px;
+        }
+
+        .slide-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: #feca57;
+            background: linear-gradient(to bottom, #fff7d6 0%, #ffffff 100%);
+        }
+
+        /* Frame Gambar Di Atas */
+        .image-box {
+            width: 100%;
+            height: 170px;
+            background-color: #ffffff;
+            border: 4px dashed #ff9f43;
+            border-radius: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5.5rem;
+            margin-bottom: 12px;
+            box-shadow: inset 0 0 12px rgba(255, 159, 67, 0.15);
+        }
+
+        /* Detail Kata */
+        .word-en {
+            font-size: 2.2rem;
+            color: #2e86de;
+            font-weight: 900;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 0px #abd0f7;
+        }
+
+        .pronunciation {
+            font-size: 0.95rem;
+            color: #ee5253;
+            font-weight: bold;
+            margin-bottom: 6px;
+            background: #ffdddd;
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid #ffb8b8;
+        }
+
+        .word-id {
+            font-size: 1.3rem;
+            color: #10ac84;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        /* Tombol Suara */
+        .btn-audio {
+            background: #ff9f43;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 0 #e67e22;
+            transition: all 0.1s;
+        }
+
+        .btn-audio:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #e67e22;
+        }
+
+        /* Box Percakapan di Bawah */
+        .dialogue-box {
+            background: #ffffff;
+            border: 3px solid #54a0ff;
+            border-radius: 18px;
+            padding: 12px 14px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+        }
+
+        .dialogue-title {
+            font-weight: bold;
+            color: #2e86de;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .speaker {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        /* Navigasi Slide */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: #ffffff;
+            border-top: 4px solid #feca57;
+        }
+
+        .btn-nav {
+            background: #1dd1a1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 0 #10ac84;
+            transition: all 0.1s;
+        }
+
+        .btn-nav:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #10ac84;
+        }
+
+        .btn-nav:disabled {
+            background: #c8d6e5;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            font-weight: bold;
+            color: #2f3542;
+            font-size: 1rem;
+            background: #f1f2f6;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="header">
+            🎒 English Pocket - SD Kelas 4 🌟
+        </div>
+
+        <div class="slide-content">
+            <!-- 1. Gambar paling atas -->
+            <div class="image-box" id="icon">🏫</div>
+
+            <!-- 2. Kata, Cara Pengucapan, & Terjemahan -->
+            <div class="word-en" id="word-en">School</div>
+            <div class="pronunciation" id="pronunciation">/skuːl/ (skul)</div>
+            <div class="word-id" id="word-id">Sekolah</div>
+
+            <!-- Tombol Audio Suara -->
+            <button class="btn-audio" onclick="playAudio()">🔊 Suara Pengucapan</button>
+
+            <!-- 3. Contoh Percakapan di bawah -->
+            <div class="dialogue-box">
+                <div class="dialogue-title">💬 Contoh Percakapan:</div>
+                <p><span class="speaker">A:</span> <span id="dialog-a">Where do you go?</span></p>
+                <p><span class="speaker">B:</span> <span id="dialog-b">I go to school.</span></p>
+                <p style="margin-top:5px; font-style:italic; color:#576574; font-size:0.83rem;" id="dialog-trans">
+                    (A: Ke mana kamu pergi? | B: Saya pergi ke sekolah.)
+                </p>
+            </div>
+        </div>
+
+        <!-- Controller Pindah Slide -->
+        <div class="navigation">
+            <button class="btn-nav" id="btn-prev" onclick="changeSlide(-1)">◀ Prev</button>
+            <span class="page-indicator" id="page-num">1 / 30</span>
+            <button class="btn-nav" id="btn-next" onclick="changeSlide(1)">Next ▶</button>
+        </div>
+    </div>
+
+    <script>
+        // Data 30 Kosakata (Sekolah & Hari)
+        const vocabularyData = [
+            { icon: "🏫", en: "School", pron: "/skuːl/ (skul)", id: "Sekolah", a: "Where do you go?", b: "I go to school.", trans: "Ke mana kamu pergi? | Saya pergi ke sekolah." },
+            { icon: "🏫", en: "Classroom", pron: "/ˈklɑːs.ruːm/ (klas-rum)", id: "Ruang Kelas", a: "Is our classroom clean?", b: "Yes, it is clean.", trans: "Apakah kelas kita bersih? | Ya, kelasnya bersih." },
+            { icon: "📖", en: "Book", pron: "/bʊk/ (buk)", id: "Buku", a: "Can I borrow your book?", b: "Sure, here it is.", trans: "Bolehkah aku pinjam bukumu? | Tentu, ini dia." },
+            { icon: "✏️", en: "Pencil", pron: "/ˈpen.səl/ (pen-sl)", id: "Pensil", a: "Do you have a pencil?", b: "Yes, I have two pencils.", trans: "Kamu punya pensil? | Ya, aku punya dua pensil." },
+            { icon: "🖊️", en: "Pen", pron: "/pen/ (pen)", id: "Pulpen", a: "I write with a pen.", b: "Me too!", trans: "Saya menulis dengan pulpen. | Saya juga!" },
+            { icon: "📏", en: "Ruler", pron: "/ˈruː.lər/ (ru-ler)", id: "Penggaris", a: "Where is my ruler?", b: "It is on the desk.", trans: "Di mana penggaris saya? | Ada di atas meja." },
+            { icon: "🧽", en: "Eraser", pron: "/ɪˈreɪ.zər/ (i-rei-zer)", id: "Penghapus", a: "May I use your eraser?", b: "Yes, you can.", trans: "Boleh saya pakai penghapusmu? | Ya, boleh." },
+            { icon: "🎒", en: "Schoolbag", pron: "/ˈskuːl.bæɡ/ (skul-beg)", id: "Tas Sekolah", a: "Your schoolbag is cool!", b: "Thank you!", trans: "Tas sekolahmu keren! | Terima kasih!" },
+            { icon: "🪑", en: "Chair", pron: "/tʃeər/ (cér)", id: "Kursi", a: "Please sit on this chair.", b: "Thank you, teacher.", trans: "Silakan duduk di kursi ini. | Terima kasih, Ibu/Bapak guru." },
+            { icon: "🛏️", en: "Desk", pron: "/desk/ (desk)", id: "Meja Belajar", a: "Put your bag on the desk.", b: "Okay, I will.", trans: "Taruh tasmu di atas meja. | Baik, akan saya lakukan." },
+            { icon: "📐", en: "Pencil Case", pron: "/ˈpen.səl keɪs/ (pensl-keis)", id: "Kotak Pensil", a: "What color is your pencil case?", b: "It is blue.", trans: "Apa warna kotak pensilmu? | Warnanya biru." },
+            { icon: "🧑‍🏫", en: "Teacher", pron: "/ˈtiː.tʃər/ (ti-cer)", id: "Guru", a: "Who is your English teacher?", b: "Mr. Budi is my teacher.", trans: "Siapa guru bahasa Inggrismu? | Pak Budi adalah guru saya." },
+            { icon: "🧑‍🎓", en: "Student", pron: "/ˈstjuː.dənt/ (styu-den)", id: "Siswa / Murid", a: "Are you a student?", b: "Yes, I am a fourth grader.", trans: "Apakah kamu seorang siswa? | Ya, saya siswa kelas empat." },
+            { icon: "🟩", en: "Blackboard", pron: "/ˈblæk.bɔːd/ (blek-bord)", id: "Papan Tulis", a: "Look at the blackboard, please.", b: "Yes, teacher.", trans: "Tolong lihat ke papan tulis. | Baik, guru." },
+            { icon: "✂️", en: "Scissors", pron: "/ˈsɪz.əz/ (si-zerz)", id: "Gunting", a: "Be careful with the scissors!", b: "Alright, thank you.", trans: "Hati-hati dengan gunting itu! | Baik, terima kasih." },
+            { icon: "🧪", en: "Laboratory", pron: "/ləˈbɒr.ə.tər.i/ (la-bo-ra-to-ri)", id: "Laboratorium", a: "Let's go to the science lab!", b: "Great idea!", trans: "Ayo kita ke lab IPA! | Ide bagus!" },
+            { icon: "📚", en: "Library", pron: "/ˈlaɪ.brər.i/ (lai-bre-ri)", id: "Perpustakaan", a: "Do you like reading in the library?", b: "Yes, it is quiet.", trans: "Suka membaca di perpustakaan? | Ya, di sana tenang." },
+            { icon: "⚽", en: "Playground", pron: "/ˈpleɪ.ɡraʊnd/ (plei-graund)", id: "Lapangan Bermain", a: "Let's play football on the playground!", b: "Let's go!", trans: "Ayo main bola di lapangan! | Ayo!" },
+            { icon: "🍱", en: "Canteen", pron: "/kænˈtiːn/ (ken-tin)", id: "Kantin", a: "I am hungry. Let's go to the canteen.", b: "Me too!", trans: "Saya lapar. Ayo ke kantin. | Saya juga!" },
+            { icon: "🧹", en: "Broom", pron: "/bruːm/ (brum)", id: "Sapu", a: "We need a broom to clean the class.", b: "Here it is.", trans: "Kita butuh sapu untuk bersihkan kelas. | Ini dia." },
+            { icon: "🚮", en: "Trash Can", pron: "/træʃ kæn/ (tresh-ken)", id: "Tempat Sampah", a: "Throw the trash in the trash can.", b: "Okay!", trans: "Buang sampah di tempat sampah. | Oke!" },
+            { icon: "🔔", en: "Bell", pron: "/bel/ (bel)", id: "Bel Sekolah", a: "Did you hear the school bell?", b: "Yes, it is time for break!", trans: "Kamu dengar bel sekolah? | Ya, waktunya istirahat!" },
+            { icon: "👔", en: "Uniform", pron: "/ˈjuː.nɪ.fɔːm/ (yu-ni-form)", id: "Seragam", a: "Your uniform looks neat.", b: "Thank you!", trans: "Seragammu terlihat rapi. | Terima kasih!" },
+            
+            // Nama Hari (Days of the Week)
+            { icon: "📅", en: "Monday", pron: "/ˈmʌn.deɪ/ (man-dei)", id: "Hari Senin", a: "What do we do on Monday?", b: "We have a flag ceremony.", trans: "Apa yang kita lakukan hari Senin? | Kita upacara bendera." },
+            { icon: "📅", en: "Tuesday", pron: "/ˈtʃuːz.deɪ/ (tyuz-dei)", id: "Hari Selasa", a: "Do we have PE class on Tuesday?", b: "Yes, we do.", trans: "Apakah ada olahraga hari Selasa? | Ya, ada." },
+            { icon: "📅", en: "Wednesday", pron: "/ˈwenz.deɪ/ (wenz-dei)", id: "Hari Rabu", a: "Today is Wednesday.", b: "Yes, tomorrow is Thursday.", trans: "Hari ini hari Rabu. | Ya, besok hari Kamis." },
+            { icon: "📅", en: "Thursday", pron: "/ˈθɜːz.deɪ/ (therz-dei)", id: "Hari Kamis", a: "We study English on Thursday.", b: "I love English!", trans: "Kita belajar b.Inggris hari Kamis. | Aku suka b.Inggris!" },
+            { icon: "📅", en: "Friday", pron: "/ˈfraɪ.deɪ/ (frai-dei)", id: "Hari Jumat", a: "Do we wear Pramuka uniform on Friday?", b: "Yes, we do.", trans: "Apakah kita pakai seragam Pramuka hari Jumat? | Ya, benar." },
+            { icon: "📅", en: "Saturday", pron: "/ˈsæt.ə.deɪ/ (se-ter-dei)", id: "Hari Sabtu", a: "What do you do on Saturday?", b: "I play with my friends.", trans: "Apa yang kamu lakukan hari Sabtu? | Aku bermain dengan teman-teman." },
+            { icon: "🌞", en: "Sunday", pron: "/ˈsʌn.deɪ/ (san-dei)", id: "Hari Minggu", a: "Sunday is a holiday!", b: "Hooray! Let's rest.", trans: "Hari Minggu adalah hari libur! | Hore! Ayo istirahat." }
+        ];
+
+        let currentIndex = 0;
+
+        function updateCard() {
+            const data = vocabularyData[currentIndex];
+            document.getElementById('icon').textContent = data.icon;
+            document.getElementById('word-en').textContent = data.en;
+            document.getElementById('pronunciation').textContent = data.pron;
+            document.getElementById('word-id').textContent = data.id;
+            document.getElementById('dialog-a').textContent = data.a;
+            document.getElementById('dialog-b').textContent = data.b;
+            
+            const transArray = data.trans.split('|');
+            document.getElementById('dialog-trans').textContent = `(A: ${transArray[0].trim()} | B: ${transArray[1].trim()})`;
+            
+            document.getElementById('page-num').textContent = `${currentIndex + 1} / ${vocabularyData.length}`;
+            
+            document.getElementById('btn-prev').disabled = currentIndex === 0;
+            document.getElementById('btn-next').disabled = currentIndex === vocabularyData.length - 1;
+        }
+
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex >= vocabularyData.length) currentIndex = vocabularyData.length - 1;
+            updateCard();
+        }
+
+        function playAudio() {
+            const word = vocabularyData[currentIndex].en;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85; // Kecepatan disesuaikan untuk anak-anak
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Tampilkan slide pertama saat dibuka
+        updateCard();
+    </script>
+</body>
+</html>
